@@ -27,21 +27,10 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
     <div className='select-filters'>
       <div className='d-flex py-3 col-8'>
         <select
-          id="gender"
-          value={selectedGender}
-          onChange={handleGenderChange}
-          className="form-select form-select-sm single-select select-bs select-filter"
-        >
-          <optgroup label="GENERO">
-            <option value="male">Masculino</option>
-            <option value="female">Femenino</option>
-          </optgroup>
-        </select>
-        <select
           id="nationality"
           value={selectedNationality}
           onChange={handleNationalityChange}
-          className="form-select form-select-sm single-select select-bs mx-4 select-filter"
+          className="form-select form-select-sm single-select select-bsselect-filter"
         >
           <optgroup label="NACIONALIDAD">
             <option value="US">EEUU</option>
@@ -56,6 +45,17 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
             <option value="NO">NO</option>
             <option value="IE">IE</option>
             <option value="IE">UA</option>
+          </optgroup>
+        </select>
+        <select
+          id="gender"
+          value={selectedGender}
+          onChange={handleGenderChange}
+          className="form-select form-select-sm single-select select-bs mx-4 select-filter"
+        >
+          <optgroup label="GENERO">
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
           </optgroup>
         </select>
       </div>

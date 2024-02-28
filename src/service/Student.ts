@@ -5,12 +5,25 @@ interface Name {
   last: string;
 }
 
+interface Picture {
+  large: string;
+}
+
+interface Location {
+  country: string;
+  street: {
+    name: string;
+  };
+}
+
 interface Result {
   name: Name;
+  picture: Picture
   gender: string;
+
   email: string;
   phone: string;
-  nat: string;
+  location: Location;
 }
 
 interface RandomUserResponse {
@@ -19,10 +32,12 @@ interface RandomUserResponse {
 
 export interface Student {
   name: string;
+  img:  string;
   gender: string;
+  street: string;
   email: string;
   phone: string;
-  nationality: string;
+  location: string;
 }
 
 const fetchData = async (): Promise<Student[]> => {
@@ -30,11 +45,13 @@ const fetchData = async (): Promise<Student[]> => {
     const response: AxiosResponse<RandomUserResponse> = await axios.get<RandomUserResponse>('https://randomuser.me/api/?results=10');
     const data: Result[] = response.data.results;
     const students: Student[] = data.map((result: Result) => ({
+      img: `${result.picture.large}`,
       name: `${result.name.first} ${result.name.last}`,
       gender: result.gender,
+      street: `${result.location.street.name}`,
       email: result.email,
       phone: result.phone,
-      nationality: result.nat,
+      location: `${result.location.country}`,
     }));
     return students;
   } catch (error) {

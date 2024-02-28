@@ -90,7 +90,7 @@ input[type="search"] {
   background-size: 17px 17px;
   background-color: white;
   margin-bottom: 1rem;
-  width: 82vw!important;
+ margin-top: 2rem;
   position: relative;
   right: 0;
   min-height: 34px;
@@ -223,9 +223,7 @@ input[type="search"]:focus {
   width: 100%;
 }
 
-input[type="search"]  {
-  width: 100% !important;
-}
+
 
 .dataTables_wrapper .dataTables_filter input {
   color: #222020;

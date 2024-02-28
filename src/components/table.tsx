@@ -79,15 +79,17 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
   };
 
   return (
-    <div className="container pt-5">
+    <div className="container flex-column pt-5">
       <div className="row">
-        <div className="col-sm-12 col-md-6">
-          <div className="dt-title">
-            <h2>Mi tabla</h2>
+        <div className='d-flex'>
+          <div className="col-sm-12 col-md-6">
+            <div className="dt-title">
+              <h2>Mi tabla</h2>
+            </div>
           </div>
-        </div>
-        <div className="col-sm-12 col-md-6">
-          <Buttons onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} />
+          <div className="col-sm-12 col-md-6">
+            <Buttons onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} />
+          </div>
         </div>
         <div className="col-sm-12 mt-4 filtros-content">
           <Filters onFilterChange={handleFilterChange} genders={genders} nationalities={nationalities} />
@@ -102,7 +104,7 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
 
 const Buttons = ({ onEditClick, onDeleteClick }: { onEditClick: () => void, onDeleteClick: () => void }) => {
   return (
-    <div className="d-flex justify-content-end align-items-center">
+    <div className="d-flex mt-3">
       <button className="btn btn-sm btn-outline-primary px-4 me-2" id="filtrosBtn">
         <i className="bi bi-sliders"></i> Filtros
       </button>
@@ -135,16 +137,25 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
             className: 'dt-checkbox',
             render: (_: any, __: any, index: number) => `<input type="checkbox"/>`
           },
+          {
+            data: 'img',
+            searchable: false,
+            render: (data: any, type: any, row: any) => {
+              return type === 'display' ? `<img src="${data}" alt="${row.name}" style="width:30px; height:30px; border-radius: 50%"/>` : data;
+            }
+          },
           { data: 'name', searchable: true },
           { data: 'gender', searchable: true },
+          { data: 'street', searchable: true },
           { data: 'email', searchable: true },
           { data: 'phone', searchable: true },
-          { data: 'nationality', searchable: true },
+          { data: 'location', searchable: true },
         ],
+        autoWidth: true,
       });
 
       $(tableRef.current).on('change', '.dt-checkbox input[type="checkbox"]', function () {
-        const index = table.row($(this).closest('tr')).index(); // Obtener el índice de la fila seleccionada
+        const index = table.row($(this).closest('tr')).index();
         if ($(this).is(':checked')) {
           setSelectedIndices(prevIndices => [...prevIndices, index]);
         } else {
@@ -166,11 +177,13 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
             <th scope="col">
               <i className="bi bi-check-lg"></i>
             </th>
+            <th scope="col"></th>
             <th scope="col">Nombre</th>
             <th scope="col">Género</th>
+            <th scope="col">Direccion</th>
             <th scope="col">Correo electrónico</th>
-            <th scope="col">Celular</th>
-            <th scope="col">Nacionalidad</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">País</th>
           </tr>
         </thead>
         <tbody />
