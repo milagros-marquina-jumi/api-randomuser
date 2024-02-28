@@ -30,7 +30,7 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
           id="nationality"
           value={selectedNationality}
           onChange={handleNationalityChange}
-          className="form-select form-select-sm single-select select-bsselect-filter"
+          className="form-select form-select-sm single-select select-bs select-filter"
         >
           <optgroup label="NACIONALIDAD">
             <option value="US">EEUU</option>
