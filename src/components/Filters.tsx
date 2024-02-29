@@ -19,7 +19,9 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
       onFilterChange('nationality', selectedNationality);
       setSearchResults(true);
     } else {
-      setSearchResults(false);
+      onFilterChange('gender', '');
+      onFilterChange('nationality', '');
+      setSearchResults(null);
     }
   };
 
@@ -33,18 +35,25 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
           className="form-select form-select-sm single-select select-bs select-filter"
         >
           <optgroup label="NACIONALIDAD">
-            <option value="US">EEUU</option>
-            <option value="FR">Francia</option>
-            <option value="ES">España</option>
-            <option value="CH">Chile</option>
-            <option value="FI">FILANDIA</option>
-            <option value="BR">BRASIL</option>
-            <option value="IR">IRLANDA</option>
+            <option value="">Todos</option>
+            <option value="US">US</option>
+            <option value="FR">FR</option>
+            <option value="ES">ES</option>
+            <option value="CH">CH</option>
+            <option value="FI">FI</option>
+            <option value="MX">MX</option>
+            <option value="BR">BR</option>
+            <option value="IR">IR</option>
             <option value="TR">TR</option>
             <option value="NZ">NZ</option>
             <option value="NO">NO</option>
             <option value="IE">IE</option>
-            <option value="IE">UA</option>
+            <option value="GB">GB</option>
+            <option value="CA">CA</option>
+            <option value="NZ">NZ</option>
+            <option value="RS">RS</option>
+            <option value="IN">IN</option>
+            <option value="NL">NL</option>
           </optgroup>
         </select>
         <select
@@ -54,6 +63,7 @@ const Filters = ({ onFilterChange }: { onFilterChange: (name: string, value: str
           className="form-select form-select-sm single-select select-bs mx-4 select-filter"
         >
           <optgroup label="GENERO">
+            <option value="">Todos</option>
             <option value="male">Masculino</option>
             <option value="female">Femenino</option>
           </optgroup>

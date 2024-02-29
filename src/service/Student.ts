@@ -20,10 +20,10 @@ interface Result {
   name: Name;
   picture: Picture
   gender: string;
-
   email: string;
   phone: string;
   location: Location;
+  nat: string;
 }
 
 interface RandomUserResponse {
@@ -38,6 +38,7 @@ export interface Student {
   email: string;
   phone: string;
   location: string;
+  nationality: string;
 }
 
 const fetchData = async (): Promise<Student[]> => {
@@ -52,6 +53,7 @@ const fetchData = async (): Promise<Student[]> => {
       email: result.email,
       phone: result.phone,
       location: `${result.location.country}`,
+      nationality: result.nat,
     }));
     return students;
   } catch (error) {
