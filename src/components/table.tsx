@@ -80,8 +80,8 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
 
   return (
     <div className="container flex-column pt-5">
-      <div className="row">
-        <div className='d-flex'>
+      <div className="row ">
+        <div className='d-flex flex-column'>
           <div className="col-sm-12 col-md-6">
             <div className="dt-title">
               <h2>Mi tabla</h2>
@@ -95,7 +95,7 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
           <Filters onFilterChange={handleFilterChange} genders={genders} nationalities={nationalities} />
         </div>
         <div className="col-sm-12 pt-1">
-          <DataTable students={displayedStudents} selectedIndices={selectedIndices} setSelectedIndices={setSelectedIndices} filterCounts={filterCounts} />
+          <DataTable students={displayedStudents} onFilterChange={handleFilterChange} selectedIndices={selectedIndices} setSelectedIndices={setSelectedIndices} filterCounts={filterCounts} />
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@ const Buttons = ({ onEditClick, onDeleteClick }: { onEditClick: () => void, onDe
   );
 };
 
-const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts }: { students: Student[], selectedIndices: number[], setSelectedIndices: React.Dispatch<React.SetStateAction<number[]>>, filterCounts: { [key: string]: number } }) => {
+const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts, onFilterChange }: { students: Student[], selectedIndices: number[], setSelectedIndices: React.Dispatch<React.SetStateAction<number[]>>, filterCounts: { [key: string]: number }, onFilterChange: (name: string, value: string) => void }) => {
   const tableRef = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
       const table = $(tableRef.current).DataTable({
         paging: true,
         pageLength: 10,
-        destroy: true, // Agregado para destruir la tabla anterior al actualizarla
+        destroy: true,
         data: students,
         columns: [
           {
@@ -150,6 +150,7 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
           { data: 'email', searchable: true },
           { data: 'phone', searchable: true },
           { data: 'location', searchable: true },
+          { data: 'nationality', searchable: true },
         ],
         autoWidth: true,
       });
@@ -169,6 +170,13 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
     }
   }, [students, setSelectedIndices]);
 
+  useEffect(() => {
+    if (tableRef.current) {
+      const table = $(tableRef.current).DataTable();
+      table.clear().rows.add(students).draw();
+    }
+  }, [students]);
+
   return (
     <div className="dt-example">
       <table ref={tableRef} className="table table-hover table-light" id="example">
@@ -184,6 +192,7 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
             <th scope="col">Correo electrónico</th>
             <th scope="col">Telefono</th>
             <th scope="col">País</th>
+            <th scope="col">Nacionalidad</th>
           </tr>
         </thead>
         <tbody />
