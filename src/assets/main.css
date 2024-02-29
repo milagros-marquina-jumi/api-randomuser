@@ -90,13 +90,15 @@ input[type="search"] {
   background-size: 17px 17px;
   background-color: white;
   margin-bottom: 1rem;
- margin-top: 2rem;
   position: relative;
   right: 0;
   min-height: 34px;
   float: left;
   margin-left: 0!important;
   box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    color: #222020;
+    width: 100%;
+    border: none;
 }
 .dataTables_length {
   display: none;
