@@ -8,7 +8,7 @@ import { Student } from '../service/Student';
 const Table = ({ students, onFilterChange }: { students: Student[], onFilterChange: (name: string, value: string) => void }) => {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [filterCounts, setFilterCounts] = useState<{ [key: string]: number }>({});
-  const [displayedStudents, setDisplayedStudents] = useState<Student[]>([]);
+  const [displayedStudents, setDisplayedStudents] = useState<Student[]>([]); // Estado para mantener los estudiantes mostrados en la tabla
   const [genders, setGenders] = useState<string[]>([]);
   const [nationalities, setNationalities] = useState<string[]>([]);
   const [filters, setFilters] = useState<{ gender: string; nationality: string }>({
@@ -67,7 +67,7 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
     setSelectedIndices([]);
     if (deletedStudents.length > 0) {
       console.log(`Se eliminaron los estudiantes: ${deletedStudents.join(', ')}`);
-      setDisplayedStudents(updatedStudents);
+      setDisplayedStudents(updatedStudents); // Actualizar la lista de estudiantes mostrados después de eliminar
     } else {
       console.log('No se seleccionaron estudiantes para eliminar.');
     }

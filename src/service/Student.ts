@@ -32,7 +32,7 @@ interface RandomUserResponse {
 
 export interface Student {
   name: string;
-  img:  string;
+  img: string;
   gender: string;
   street: string;
   email: string;
