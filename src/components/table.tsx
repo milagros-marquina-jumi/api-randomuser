@@ -8,7 +8,7 @@ import { Student } from '../service/Student';
 const Table = ({ students, onFilterChange }: { students: Student[], onFilterChange: (name: string, value: string) => void }) => {
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [filterCounts, setFilterCounts] = useState<{ [key: string]: number }>({});
-  const [displayedStudents, setDisplayedStudents] = useState<Student[]>([]); // Estado para mantener los estudiantes mostrados en la tabla
+  const [displayedStudents, setDisplayedStudents] = useState<Student[]>([]);
   const [genders, setGenders] = useState<string[]>([]);
   const [nationalities, setNationalities] = useState<string[]>([]);
   const [filters, setFilters] = useState<{ gender: string; nationality: string }>({
@@ -67,7 +67,7 @@ const Table = ({ students, onFilterChange }: { students: Student[], onFilterChan
     setSelectedIndices([]);
     if (deletedStudents.length > 0) {
       console.log(`Se eliminaron los estudiantes: ${deletedStudents.join(', ')}`);
-      setDisplayedStudents(updatedStudents); // Actualizar la lista de estudiantes mostrados después de eliminar
+      setDisplayedStudents(updatedStudents);
     } else {
       console.log('No se seleccionaron estudiantes para eliminar.');
     }
@@ -118,7 +118,7 @@ const Buttons = ({ onEditClick, onDeleteClick }: { onEditClick: () => void, onDe
   );
 };
 
-const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts }: { students: Student[], selectedIndices: number[], setSelectedIndices: React.Dispatch<React.SetStateAction<number[]>>, filterCounts: { [key: string]: number } }) => {
+const DataTable = ({ students, setSelectedIndices }: { students: Student[], selectedIndices: number[], setSelectedIndices: React.Dispatch<React.SetStateAction<number[]>>, filterCounts: { [key: string]: number } }) => {
   const tableRef = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const DataTable = ({ students, selectedIndices, setSelectedIndices, filterCounts
       const table = $(tableRef.current).DataTable({
         paging: true,
         pageLength: 10,
-        destroy: true, // Agregado para destruir la tabla anterior al actualizarla
+        destroy: true,
         data: students,
         columns: [
           {
